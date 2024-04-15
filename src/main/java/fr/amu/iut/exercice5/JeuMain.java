@@ -1,11 +1,13 @@
 package fr.amu.iut.exercice5;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
 
 public class JeuMain extends Application {
 
@@ -14,6 +16,9 @@ public class JeuMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        Rectangle obs = new Obstacle();
+
 
         root = new BorderPane();
 
@@ -29,6 +34,7 @@ public class JeuMain extends Application {
         jeu.getChildren().add(fantome);
         root.setCenter(jeu);
         //on construit une scene 640 * 480 pixels
+
         scene = new Scene(root);
 
         //Gestion du déplacement du personnage
@@ -57,12 +63,27 @@ public class JeuMain extends Application {
                     j1.deplacerADroite(scene.getWidth());
                     break;
                 case Z:
-                    //j2...... vers le haut;
+                    j2.deplacerEnHaut();//j2...... vers le haut;
+                    break;
+                case UP:
+                    j1.deplacerEnHaut();//j1...... vers le haut;
+                    break;
+                case D:
+                    j2.deplacerADroite(scene.getWidth());//j2...... vers la droite;
+                    break;
+                case Q:
+                    j2.deplacerAGauche();//j2...... vers la gauche;
+                    break;
+                case S:
+                    j2.deplacerEnBas(scene.getHeight());//j2...... vers le bas;
+                    break;
+                case DOWN:
+                    j1.deplacerEnBas(scene.getWidth());//j2...... vers le haut;
                     break;
 
             }
             if (j1.estEnCollision(j2))
-                System.out.println("Collision....");
+                Platform.exit();
         });
     }
 
