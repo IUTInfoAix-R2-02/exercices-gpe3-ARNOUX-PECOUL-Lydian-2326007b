@@ -5,6 +5,5 @@ import javafx.scene.shape.Rectangle;
 public class Obstacle extends Rectangle {
 
     public Obstacle(){
-
     }
 }

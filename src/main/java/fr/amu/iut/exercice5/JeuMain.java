@@ -6,21 +6,48 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 public class JeuMain extends Application {
 
     private Scene scene;
     private BorderPane root;
 
+    private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+
     @Override
     public void start(Stage primaryStage) {
 
-        Rectangle obs = new Obstacle();
 
+        Obstacle obstacle1 = new Obstacle();
+
+        obstacle1.setFill(Paint.valueOf("Red"));
+        obstacle1.setLayoutX(20);
+        obstacle1.setLayoutY(20);
+        obstacle1.setWidth(100);
+        obstacle1.setHeight(120);
+        obstacles.add(obstacle1);
+
+
+        Obstacle obstacle2 = new Obstacle();
+
+        obstacle2.setFill(Paint.valueOf("Green"));
+        obstacle2.setLayoutX(300);
+        obstacle2.setLayoutY(100);
+        obstacle2.setWidth(40);
+        obstacle2.setHeight(60);
+        obstacles.add(obstacle2);
 
         root = new BorderPane();
+
+        for (Obstacle obs : obstacles) {
+            root.getChildren().add(obs);
+        }
 
         //Acteurs du jeu
         Personnage pacman = new Pacman();
@@ -54,7 +81,12 @@ public class JeuMain extends Application {
      * @param j2
      */
     private void deplacer(Personnage j1, Personnage j2) {
+
         scene.setOnKeyPressed((KeyEvent event) -> {
+            double savedJ1X = j1.getLayoutX();
+            double savedJ1Y = j1.getLayoutY();
+            double savedJ2X = j2.getLayoutX();
+            double savedJ2Y = j2.getLayoutY();
             switch (event.getCode()) {
                 case LEFT:
                     j1.deplacerAGauche();
@@ -82,8 +114,20 @@ public class JeuMain extends Application {
                     break;
 
             }
-            if (j1.estEnCollision(j2))
-                Platform.exit();
+
+            for (Obstacle obs : obstacles) {
+                if (j1.estEnCollision(obs)) {
+                    j1.setLayoutX(savedJ1X);
+                    j1.setLayoutY(savedJ1Y);
+                }
+                if (j2.estEnCollision(obs)) {
+                    j2.setLayoutX(savedJ2X);
+                    j2.setLayoutY(savedJ2Y);
+                }
+
+                if (j1.estEnCollision(j2))
+                    Platform.exit();
+            }
         });
     }
 
