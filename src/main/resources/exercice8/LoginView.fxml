@@ -17,6 +17,8 @@
     <PasswordField fx:id="pwd" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <TextField fx:id="usr" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
+   <Button text="Ok" fx:id="Ok" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#okClicked"></Button>
+   <Button text="Cancel" fx:id="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#cancelClicked"></Button>
 <!--  à compléter pour les boutons -->
 
    <columnConstraints>
