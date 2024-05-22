@@ -1,6 +1,10 @@
-package fr.amu.iut.exercice1;
+package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,6 +25,10 @@ public class Palette extends Application {
     private int nbRouge = 0;
     private int nbBleu = 0;
 
+    private IntegerProperty nbFois = new SimpleIntegerProperty();
+
+    private StringProperty message = new SimpleStringProperty();
+
     private Label texteDuHaut;
 
     private Button vert;
@@ -33,9 +41,9 @@ public class Palette extends Application {
 
     private Label texteDuBas;
 
-
     @Override
     public void start(Stage primaryStage) {
+
         root = new BorderPane();
 
         texteDuHaut = new Label();
@@ -58,6 +66,27 @@ public class Palette extends Application {
         bleu = new Button("Bleu");
 
         /* VOTRE CODE ICI */
+
+        vert.setOnAction(event ->{
+            nbVert+=1;
+            nbFois.set(nbVert);
+            message.set(vert.getText());
+            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+        } );
+
+        rouge.setOnAction(event ->{
+            nbRouge+=1;
+            nbFois.set(nbRouge);
+            message.set(rouge.getText());
+            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+        } );
+
+        bleu.setOnAction(event ->{
+            nbBleu+=1;
+            nbFois.set(nbBleu);
+            message.set(bleu.getText());
+            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+        } );
 
         boutons.getChildren().addAll(vert, rouge, bleu);
 
