@@ -1,2 +1,61 @@
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane></BorderPane>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane id="root" minHeight="400" minWidth="600">
+    <top>
+        <MenuBar id="menuRoot">
+            <Menu id="file" text="File">
+                <MenuItem id="new" text="New"></MenuItem>
+                <MenuItem id="open" text="Open"></MenuItem>
+                <MenuItem id="save" text="Save"></MenuItem>
+                <MenuItem id="exit" text="Exit"></MenuItem>
+            </Menu>
+            <Menu id="edit" text="Edit">
+                <MenuItem id="cut" text="Cut"></MenuItem>
+                <MenuItem id="copy" text="Copy"></MenuItem>
+                <MenuItem id="paste" text="Paste"></MenuItem>
+            </Menu>
+            <Menu id="help" text="Help"></Menu>
+        </MenuBar>
+    </top>
+    <left>
+        <VBox id="leftBox" spacing="10" alignment="CENTER">
+            <Text text="Boutons : "></Text>
+            <Button id="b1" text="Button 1"></Button>
+            <Button id="b2" text="Button 2"></Button>
+            <Button id="b3" text="Button 3"></Button>
+        </VBox>
+    </left>
+    <center>
+        <GridPane id="grilleFormulaire" hgap="10" vgap="10" alignment="CENTER">
+            <Label id="namel" text="Name : " GridPane.rowIndex="0" GridPane.columnIndex="1"></Label>
+            <TextField id="name" GridPane.rowIndex="0" GridPane.columnIndex="2"></TextField>
+
+            <Label id="emaill" text="Email : " GridPane.rowIndex="1" GridPane.columnIndex="1"></Label>
+            <TextField id="email" GridPane.rowIndex="1" GridPane.columnIndex="2"></TextField>
+
+            <Label id="pswdl" text="Password : " GridPane.rowIndex="2" GridPane.columnIndex="1"></Label>
+            <TextField id="pswd" GridPane.rowIndex="2" GridPane.columnIndex="2"></TextField>
+
+            <Button id="submit" text="Submit" GridPane.halignment="RIGHT" GridPane.rowIndex="3"
+                    GridPane.columnIndex="1"></Button>
+            <Button id="cancel" text="Cancel" GridPane.rowIndex="3"
+                    GridPane.columnIndex="2"></Button>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <Label text="Ceci est un label de bas de page" BorderPane.alignment="CENTER"></Label>
+    </bottom>
+</BorderPane>

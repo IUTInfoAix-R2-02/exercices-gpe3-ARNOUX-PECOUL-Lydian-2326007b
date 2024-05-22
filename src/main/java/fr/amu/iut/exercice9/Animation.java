@@ -40,6 +40,9 @@ public class Animation extends Application {
 
         SequentialTransition st = new SequentialTransition(transition1, transition2, transition3, transition4, transition5);
 
+        st.setAutoReverse(true);
+        st.setCycleCount(2);
+
         customButton.setOnMousePressed(mouseEvent -> st.play());
 
         primaryStage.setTitle("Animation");
