@@ -60,6 +60,7 @@ public class Palette extends Application {
         boutons = new HBox(10);
         boutons.setAlignment(Pos.CENTER);
         boutons.setPadding(new Insets(10, 5, 10, 5));
+
         texteDuBas = new Label();
         bas.setAlignment(Pos.CENTER_RIGHT);
         bas.getChildren().addAll(boutons, texteDuBas);

@@ -1,6 +1,10 @@
-package fr.amu.iut.exercice2;
+package fr.amu.iut.exercice12;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -58,9 +62,39 @@ public class Palette extends Application {
         rouge = new CustomButton("Rouge", "#F21411");
         bleu = new CustomButton("Bleu", "#3273A4");
 
+        vert.nbClicsProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                texteDuHaut.setText("Vert appuyé " + vert.getNbClics() + " fois.");
+                texteDuBas.setText("Le Vert est une jolie couleur !");
+            }
+        });
+
+        bleu.nbClicsProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                texteDuHaut.setText("Bleu appuyé " + bleu.getNbClics() + " fois.");
+                texteDuBas.setText("Le Bleu est une jolie couleur !");
+            }
+        });
+
+        rouge.nbClicsProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                texteDuHaut.setText("Rouge appuyé " + rouge.getNbClics() + " fois.");
+
+                texteDuBas.setText("Le Rouge est une jolie couleur !");
+            }
+        });
+
         gestionnaireEvenement = (event) -> {
             sourceOfEvent = (CustomButton) event.getSource();
+            sourceOfEvent.setNbClics(sourceOfEvent.nbClicsProperty().getValue()+1);
+            panneau.setStyle("-fx-background-color: " + sourceOfEvent.getCouleur());
+            texteDuBas.styleProperty().bind(Bindings.concat("-fx-text-fill: ", sourceOfEvent.getCouleur()));
         };
+
+
 
         vert.setOnAction(gestionnaireEvenement);
         rouge.setOnAction(gestionnaireEvenement);
