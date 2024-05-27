@@ -1,6 +1,7 @@
 package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,6 +29,8 @@ public class Palette extends Application {
     private IntegerProperty nbFois = new SimpleIntegerProperty();
 
     private StringProperty message = new SimpleStringProperty();
+
+    private StringProperty couleurPanneau = new SimpleStringProperty("#000000");
 
     private Label texteDuHaut;
 
@@ -71,22 +74,27 @@ public class Palette extends Application {
             nbVert+=1;
             nbFois.set(nbVert);
             message.set(vert.getText());
-            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+            couleurPanneau.set("#00ff00");
         } );
 
         rouge.setOnAction(event ->{
             nbRouge+=1;
             nbFois.set(nbRouge);
             message.set(rouge.getText());
-            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+            couleurPanneau.set("#ff0000");
         } );
 
         bleu.setOnAction(event ->{
             nbBleu+=1;
             nbFois.set(nbBleu);
             message.set(bleu.getText());
-            texteDuHaut.setText(message.getValue() +" choisi " + nbFois.getValue() + " fois");
+            couleurPanneau.set("#0000ff");
         } );
+
+        texteDuHaut.textProperty().bind(Bindings.concat(message, " choisi ", nbFois, " fois"));
+        panneau.styleProperty().bind(Bindings.concat("-fx-background-color: ", couleurPanneau));
+        texteDuBas.textProperty().bind(Bindings.concat("Le ", message, " est une jolie couleur"));
+        texteDuBas.styleProperty().bind(Bindings.concat("-fx-text-fill: ", couleurPanneau));
 
         boutons.getChildren().addAll(vert, rouge, bleu);
 
